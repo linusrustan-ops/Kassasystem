@@ -6,11 +6,12 @@ namespace Kassasystem
 {
     internal class Kvitto
     {
-        public static string TodaysDate()
+        public string TodaysDate()
         {
-            DateTime today = DateTime.Today;
+            DateTime dateAndTime = DateTime.Now;
 
-            string receiptDate = today.ToString("yyyy-MM-dd");
+
+            string receiptDate = dateAndTime.ToString("yyyy-MM-dd" + " HH:mm | UTC zz");
 
             return receiptDate;
         }

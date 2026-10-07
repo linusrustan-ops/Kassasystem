@@ -6,5 +6,7 @@ namespace Kassasystem
 {
     internal class Varukorg
     {
+
     }
+    
 }
