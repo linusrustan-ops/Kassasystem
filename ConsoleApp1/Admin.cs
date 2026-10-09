@@ -16,7 +16,7 @@ namespace Kassasystem
 
 
                 Console.Clear();
-                Console.WriteLine("Vänligen skriv in Lösenordet:\n ===============\n  Eller skriv exit for att asvluta.");
+                Console.WriteLine("Vänligen skriv in Lösenordet:\n =============== \n  Eller skriv exit for att asvluta.");
 
                 string input = Console.ReadLine();
 
@@ -30,7 +30,7 @@ namespace Kassasystem
                 else
                 {
                     Console.WriteLine("Fel lösenord, försök igen!");
-
+                    
                 }
             }
 
@@ -77,6 +77,15 @@ namespace Kassasystem
                 }
             }
         }
+
+        
+       
+        
+
+        
+        
+
+        
 
 
     }

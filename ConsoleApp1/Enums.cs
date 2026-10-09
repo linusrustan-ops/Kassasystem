@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Kassasystem
 {
-    public enum Type
+    public enum _Type
     {
         KG,
         Styck

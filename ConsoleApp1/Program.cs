@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            UI.Menu1();
+            UI Ui = new UI();
+            Ui.Menu1();
         }
     }
 }
