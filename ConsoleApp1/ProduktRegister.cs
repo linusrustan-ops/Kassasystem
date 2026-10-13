@@ -6,7 +6,7 @@ namespace Kassasystem
 {
     internal class ProduktRegister
     {
-        private Dictionary<int, Vara> varuRegister;
+        private Dictionary<int, Product> varuRegister;
 
         public ProduktRegister()
         {
@@ -15,20 +15,15 @@ namespace Kassasystem
         
 
 
-        public Dictionary<int, Vara> FillDictionary()
+        public Dictionary<int, Product> FillDictionary()
         {
             string searchFile = "Varor.txt";
-            Dictionary<int, Vara> varuRegister = new Dictionary<int, Vara>();
+            Dictionary<int, Product> varuRegister = new Dictionary<int, Product>();
 
             if (File.Exists(searchFile))
-                Console.WriteLine("Filen hittades");
                 foreach (var row in File.ReadLines(searchFile))
-                {
-                    Console.WriteLine($"Läst rad: [{row}]");
-                    
-
+                { 
                     string[] parts = row.Split(":");
-                    Console.WriteLine($"Antal delar: {parts.Length}");
                     if (parts.Length >= 4)
                     {
                         int id;
@@ -39,8 +34,7 @@ namespace Kassasystem
                         _Type type = (Enum.Parse<_Type>(parts[3]));
 
 
-                        Vara vara = new Vara(id, name, price, type);
-                        Console.WriteLine($"Antal varor inlästa: {varuRegister.Count}");
+                        Product vara = new Product(id, name, price, type);
                         varuRegister[id] = vara;
 
                     }

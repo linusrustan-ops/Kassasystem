@@ -10,7 +10,7 @@ namespace Kassasystem
         {
             while (true)
             {
-                Console.WriteLine("=========== Välkommen till kassasystemet! ===========");
+                Console.WriteLine("=========== Välkommen till Linus Hälsoshop! ===========");
                 Console.WriteLine("" +
                     "[1]. Ny kund\n" +
                     "[2]. Admin\n" +
@@ -45,10 +45,7 @@ namespace Kassasystem
         }
 
 
-        public static void VisaProdukter(string message)
-        {
-
-        }
+        
 
         
         public static string ReadString(string message)

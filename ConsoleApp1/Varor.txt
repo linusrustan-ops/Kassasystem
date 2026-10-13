@@ -1,1 +1,5 @@
-﻿300:Monster:14.90:Styck
+﻿300:Monster 50cl:14.90:Styck
+301:Redbull 25cl:12.90:Styck
+302:Coca Cola 33cl:11.90:Styck
+303:Sprite 33cl:11.90:Styck
+304:Äpplen:34.95:KG
