@@ -7,15 +7,23 @@ namespace Kassasystem
 {
     internal class Varukorg(Product product, double quantity)
     {
-        public Product _Product { get; } = product;
-        public double Quantity { get; } = quantity;
-        public double SinglePrice { get; } = product.Price;
+        public Product _Product { get; private set; } = product;
+        public double Quantity { get; private set; } = quantity;
+        public double SinglePrice => _Product.Price;
         public double RowPrice => Quantity * SinglePrice;
 
         
+    
+
+    public double HowMany()
+        {
+           quantity = UI.ReadDecimal("Hur Mycket/Många vill du ha?");
+
+            return quantity;
+        }
+
     }
-    
-    
+
 
 }
        

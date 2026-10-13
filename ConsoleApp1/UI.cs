@@ -5,6 +5,8 @@ namespace Kassasystem
     public class UI
     {
         ProduktRegister produktregister = new ProduktRegister();
+        Nykund nykund = new Nykund();
+        
 
         public void Menu1()
         {
@@ -23,7 +25,16 @@ namespace Kassasystem
                 switch (input)
                 {
                     case "1":
-                        produktregister.SearchByID();
+                        int idInput = ReadInteger("Skriv in ID nummer");
+                        produktregister.SearchByID(idInput);
+                        Product? product = produktregister.GetProductByID(idInput);
+                        if (product != null)
+                        {
+
+                            double quantity = ReadDecimal("Hur många/mycket vill du ha?");
+                            nykund.AddToCustomer(product, quantity);
+                        }
+                        
 
                         break;
 

@@ -4,15 +4,13 @@ using System.Text;
 
 namespace Kassasystem
 {
-    internal class Product(int id, string name, double price, _Type type/*, bool isAvaible*/)
+    internal class Product(int id, string name, double price, _Type type)
     {
         public int ID { get; set; } = id;
         public string Name { get; set; } = name;
         public double Price { get; set; } = price;
         public _Type Type { get; set; } = type;
-        //public bool IsAvaible { get; set; } = isAvaible;
-
-
+        
        
     }
    

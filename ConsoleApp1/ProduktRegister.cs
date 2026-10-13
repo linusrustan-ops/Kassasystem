@@ -42,13 +42,25 @@ namespace Kassasystem
 
             return varuRegister;
         }
-        public void SearchByID()
+        public void SearchByID(int input)
         {
-            int input = UI.ReadInteger("Skriv in ID:");
+            
             if (varuRegister.ContainsKey(input))
             {
                 Console.WriteLine($"{varuRegister[input].ID} | {varuRegister[input].Name} | {varuRegister[input].Price}kr/{varuRegister[input].Type} ");
             }
+            else
+            {
+                Console.WriteLine("Varan hittades inte");
+            }
+        }
+        public Product? GetProductByID(int ID)
+        {
+            if (varuRegister.TryGetValue(ID, out Product? product))
+            {
+                return product;
+            }
+            return null;
         }
 
 
