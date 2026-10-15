@@ -6,6 +6,7 @@
         {
             UI Ui = new UI();
             Ui.Menu1();
+            
         }
     }
 }

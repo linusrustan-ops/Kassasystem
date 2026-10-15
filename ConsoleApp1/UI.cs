@@ -17,7 +17,7 @@ namespace Kassasystem
                     "[1]. Ny kund\n" +
                     "[2]. Admin\n" +
                     "[0]. Exit");
-                string input = ReadString("Ditt Val:\n");
+                string input = ReadString("\nDitt Val:\n");
 
 
 

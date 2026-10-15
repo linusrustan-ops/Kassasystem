@@ -16,21 +16,13 @@ namespace Kassasystem
             return receiptDate;
         }
 
-        public void ReceiptLol()
+        public void CreateFile(string name, string text)
         {
-            string datum = TodaysDate();
-            Console.WriteLine($"""
-                ======================================
-                ========== Linus Hälsobutik ==========
-                ======================================
+            Directory.CreateDirectory("Kvitton");
 
-                Kvittonummer:
-                Datum:{datum}
-                Kassa: 29
-                ======================================
-                ======================================
-                Produkter: 
-                """);
+            string combinedName = Path.Combine("Kvitton", name);
+
+            File.AppendAllText(combinedName, text);
         }
     }
 }

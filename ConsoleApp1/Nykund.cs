@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Kassasystem
 {
@@ -25,27 +27,39 @@ namespace Kassasystem
             }
 
         }
-        public string TodaysDate()
+        public string TodaysDate(bool dateOrTime)
         {
             DateTime dateAndTime = DateTime.Now;
 
+            if (dateOrTime == true)
+            {
+                string receiptDate = dateAndTime.ToString("yyyy-MM-dd");
+                return receiptDate;
+            }
+            else
+            {
+                string receiptTime = dateAndTime.ToString("HH: mm");
+                return receiptTime;
+            }
+           
 
-            string receiptDate = dateAndTime.ToString("yyyy-MM-dd" + " HH:mm | UTC zz");
-
-            return receiptDate;
+            
+            
         }
 
         public void Receipt()
         {
-            string datum = TodaysDate();
+            string date = TodaysDate(true);
+            string time = TodaysDate(false);
+            string filename ="Receipt_" + date + ".txt";
             double totalPrice = 0;
             string receipt = ($"""
                 ==============================================
                 ============== Linus Hälsobutik ==============
                 ==============================================
 
-                Kvittonummer:
-                Datum:{datum}
+                Datum:{date}
+                Tid:{time}
          
                 ----------------------------------------------
 
@@ -66,16 +80,26 @@ namespace Kassasystem
             receipt += $"""
 
                 ----------------------------------------------
-                $"{"Total:",-34} {totalPrice,8:F2}kr";
+                {"Total:",-34} {totalPrice,8:F2}kr
 
                 ==============================================
                                VÄLKOMMEN ÅTER!
-                """;
-                
-                
 
-            Console.WriteLine(receipt);
+
+                """;
+
+
             
+            Console.WriteLine(receipt);
+
+            Directory.CreateDirectory("Kvitton");
+
+            string combinedName = Path.Combine("Kvitton", filename);
+
+            File.AppendAllText(combinedName, receipt);
+
+
         }
+        
     }
 }
