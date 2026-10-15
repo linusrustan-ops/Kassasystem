@@ -17,26 +17,47 @@ namespace Kassasystem
                     "[1]. Ny kund\n" +
                     "[2]. Admin\n" +
                     "[0]. Exit");
-                string input = ReadString("Ditt Val:");
+                string input = ReadString("Ditt Val:\n");
 
 
 
 
                 switch (input)
                 {
-                    case "1":
-                        int idInput = ReadInteger("Skriv in ID nummer");
+                    
+
+
+                        case "1":
+                        while (true)
+                        {
+                        int idInput = ReadInteger("Skriv in ID nummer\n");
                         produktregister.SearchByID(idInput);
                         Product? product = produktregister.GetProductByID(idInput);
                         if (product != null)
                         {
 
-                            double quantity = ReadDecimal("Hur många/mycket vill du ha?");
+                            double quantity = ReadDecimal("Hur många/mycket vill du ha?\n");
                             nykund.AddToCustomer(product, quantity);
+                            Console.WriteLine("Din varukorg består av:");
+                            nykund.PrintList();
                         }
                         
-
-                        break;
+                        
+                            string payOrExit = ReadString("Skriv \"PAY\" för att betala eller skriv \"Enter\" för att handla en ny vara\n");
+                            if (payOrExit.ToUpper().Trim() == "PAY")
+                            {
+                                Console.Clear();
+                                nykund.Receipt();
+                                break;
+                            }
+                            else if (payOrExit.ToUpper().Trim() == "ENTER")
+                            {
+                                Console.Clear();
+                                continue;
+                            }
+                           
+                        }
+                            break;
 
                     case "2":
                         Admin.Password();
@@ -50,7 +71,7 @@ namespace Kassasystem
                     default:
                         Console.WriteLine("Ogiltigt svar, försök igen!");
                         continue;
-                }
+            }
             }
 
         }
@@ -77,7 +98,7 @@ namespace Kassasystem
         {
             while (true)
             {
-                
+                Console.WriteLine(message);
                 string? input = Console.ReadLine();
                 int value = 0;
 

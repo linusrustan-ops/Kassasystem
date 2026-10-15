@@ -15,5 +15,22 @@ namespace Kassasystem
 
             return receiptDate;
         }
+
+        public void ReceiptLol()
+        {
+            string datum = TodaysDate();
+            Console.WriteLine($"""
+                ======================================
+                ========== Linus Hälsobutik ==========
+                ======================================
+
+                Kvittonummer:
+                Datum:{datum}
+                Kassa: 29
+                ======================================
+                ======================================
+                Produkter: 
+                """);
+        }
     }
 }

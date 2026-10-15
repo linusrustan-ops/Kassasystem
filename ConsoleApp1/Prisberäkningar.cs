@@ -28,5 +28,11 @@ namespace Kassasystem
 
             return discountPrice;
         }
+
+        public double CalculateTotal(double a, double b)
+        {
+            double total = a * b;
+            return total;
+        }
     }
 }
