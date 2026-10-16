@@ -17,7 +17,7 @@ namespace Kassasystem
 
     public double HowMany()
         {
-           quantity = UI.ReadDecimal("Hur Mycket/Många vill du ha?");
+           quantity = UI.ReadDouble("Hur Mycket/Många vill du ha?");
 
             return quantity;
         }

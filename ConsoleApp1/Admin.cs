@@ -8,6 +8,7 @@ namespace Kassasystem
 {
     internal class Admin
     {
+        
 
         public static bool Password()
         {
@@ -58,13 +59,15 @@ namespace Kassasystem
                     case "1":
                         break;
 
-                case "2":
+                     case "2":
                         break;
 
                     case "3":
                         break;
 
                     case "4":
+                        string productName = UI.ReadString("Vad ska varan heta?");
+                        
                         break;
 
                     case "0":
@@ -76,6 +79,17 @@ namespace Kassasystem
                         break;
                 }
             }
+        }
+
+
+        public Product NewProduct()
+        {
+            int prodID = UI.ReadInteger("Vad ska ID nummret vara?");
+            string prodName = UI.ReadString("Vad ska varan heta?");
+            double prodPrice = UI.ReadDouble("Vad ska varan kosta?");
+            _Type type = UI.ReadString("Vad är varan av för typ?");
+            Product product = new Product(prodID, prodName, prodPrice, type);
+            return product;
         }
 
         

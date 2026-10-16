@@ -36,7 +36,7 @@ namespace Kassasystem
                         if (product != null)
                         {
 
-                            double quantity = ReadDecimal("Hur många/mycket vill du ha?\n");
+                            double quantity = ReadDouble("Hur många/mycket vill du ha?\n");
                             nykund.AddToCustomer(product, quantity);
                             Console.WriteLine("Din varukorg består av:");
                             nykund.PrintList();
@@ -113,7 +113,7 @@ namespace Kassasystem
             }
         }
 
-        public static double ReadDecimal(string message)
+        public static double ReadDouble(string message)
         {
             while (true)
             {
