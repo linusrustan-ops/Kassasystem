@@ -88,7 +88,7 @@ namespace Kassasystem
         }
         public void ChangeExProductName()
         {
-            int searchID = UI.ReadInteger("Vilken produkt vill du ändra på? (Sök med id)");
+            int searchID = UI.ReadInteger("Vilken produkt vill du ändra på? (Sök med id)\n");
             SearchByID(searchID);
             Product product = GetProductByID(searchID);
             if (product == null)
@@ -96,7 +96,7 @@ namespace Kassasystem
                 return;
             }
 
-            string newName = UI.ReadString("Vad ska produktens nya namn vara?").Trim();
+            string newName = UI.ReadString("Vad ska produktens nya namn vara?\n").Trim();
             newName = newName.Substring(0, 1).ToUpper() + newName.Substring(1).ToLower();
             product.ChangeName(newName);
 
@@ -107,7 +107,7 @@ namespace Kassasystem
 
         public void ChangeExProductPrice()
         {
-            int searchID = UI.ReadInteger("Vilken produkt vill du ändra på? (Sök med id)");
+            int searchID = UI.ReadInteger("Vilken produkt vill du ändra på? (Sök med id)\n");
             SearchByID(searchID);
             Product product = GetProductByID(searchID);
             if (product == null)
@@ -117,7 +117,7 @@ namespace Kassasystem
             bool priceIsAccepted = false;
             while (!priceIsAccepted)
             {
-                double newPrice = UI.ReadDouble("Vad ska produktens nya pris vara? (Max tillåtna pris är 10000.00)");
+                double newPrice = UI.ReadDouble("Vad ska produktens nya pris vara? (Max tillåtna pris är 10000.00)\n");
 
                 if (newPrice <= 1 && newPrice >= 10000)
                 {
@@ -136,7 +136,7 @@ namespace Kassasystem
 
         public int GenerateID()
         {
-            int highestID = varuRegister.OrderByDescending(x => x.Value).First().Key;
+            int highestID = varuRegister.Keys.Max();
             int generatedID = (highestID + 1);
             return generatedID;
         }

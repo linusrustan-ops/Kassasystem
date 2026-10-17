@@ -23,7 +23,7 @@ namespace Kassasystem
             foreach (var row in KundLista)
             {
 
-                Console.WriteLine($"\n{row._Product.Name}{row.RowPrice}{row.SinglePrice}{row._Product.Type}{row.Quantity}\n");
+                Console.WriteLine($"\n{row._Product.Name} |{row.Quantity} * {row.SinglePrice}kr/{row._Product.Type}|\n");
             }
 
         }

@@ -57,10 +57,10 @@ namespace Kassasystem
                 switch (input)
                 {
                     case "1":
-                        int userChoice = UI.ReadInteger("Vill du:" +
-                            "[1]. Ändra en varas namn." +
-                            "[2]. Ändra en varas pris." +
-                            "[3]. Ändra både namn och pris." +
+                        int userChoice = UI.ReadInteger("Vill du:\n" +
+                            "[1]. Ändra en varas namn.\n" +
+                            "[2]. Ändra en varas pris.\n" +
+                            "[3]. Ändra både namn och pris.\n" +
                             "[0]. Avsluta.");
                         if (userChoice == 1)
                         {
