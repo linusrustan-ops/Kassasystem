@@ -63,6 +63,82 @@ namespace Kassasystem
             return null;
         }
 
+        public void ExportDictionary(Dictionary<int, Product> varuRegister)
+        {
+            string searchFile = "Varor.txt";
+            string[] rows = varuRegister.Values.Select(p => $"{p.ID}:{p.Name}:{p.Price}:{p.Type}").ToArray();
+
+            File.WriteAllLines(searchFile, rows);
+        }
+
+        public bool AddToDictionary(Product product)
+        {
+            bool publish = varuRegister.TryAdd(product.ID, product); 
+
+            if (publish)
+            {
+                ExportDictionary(varuRegister);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void ChangeExProductName()
+        {
+            int searchID = UI.ReadInteger("Vilken produkt vill du ändra på? (Sök med id)");
+            SearchByID(searchID);
+            Product product = GetProductByID(searchID);
+            if (product == null)
+            {
+                return;
+            }
+
+            string newName = UI.ReadString("Vad ska produktens nya namn vara?").Trim();
+            newName = newName.Substring(0, 1).ToUpper() + newName.Substring(1).ToLower();
+            product.ChangeName(newName);
+
+
+
+            ExportDictionary(varuRegister);
+        }
+
+        public void ChangeExProductPrice()
+        {
+            int searchID = UI.ReadInteger("Vilken produkt vill du ändra på? (Sök med id)");
+            SearchByID(searchID);
+            Product product = GetProductByID(searchID);
+            if (product == null)
+            {
+                return;
+            }
+            bool priceIsAccepted = false;
+            while (!priceIsAccepted)
+            {
+                double newPrice = UI.ReadDouble("Vad ska produktens nya pris vara? (Max tillåtna pris är 10000.00)");
+
+                if (newPrice <= 1 && newPrice >= 10000)
+                {
+                    product.ChangePrice(newPrice);
+                    priceIsAccepted = true;
+                }
+                else
+                {
+                    Console.WriteLine("Endast 1-10000 är tillåtet som pris");
+                }
+                
+            }
+
+            ExportDictionary(varuRegister);
+        }
+
+        public int GenerateID()
+        {
+            int highestID = varuRegister.OrderByDescending(x => x.Value).First().Key;
+            int generatedID = (highestID + 1);
+            return generatedID;
+        }
 
 
 

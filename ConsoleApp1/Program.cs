@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            UI Ui = new UI();
+            ProduktRegister produktregister = new ProduktRegister();
+            Admin admin = new Admin(produktregister);
+            UI Ui = new UI(produktregister, admin);
             Ui.Menu1();
             
         }

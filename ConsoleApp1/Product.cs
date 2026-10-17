@@ -13,13 +13,13 @@ namespace Kassasystem
         public _Type Type { get; private set; } = type;
 
 
-        public void GetProductName(string productName)
+        public void ChangeName(string productName)
         {
             Name = productName;
             
         }
 
-        public void GetProductPrice(double newPrice)
+        public void ChangePrice(double newPrice)
         {
             Price = newPrice;
             

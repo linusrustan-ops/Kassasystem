@@ -2,10 +2,10 @@
 
 namespace Kassasystem
 {
-    public class UI
+    internal class UI(ProduktRegister produktregister, Admin admin)
     {
-        ProduktRegister produktregister = new ProduktRegister();
-        Nykund nykund = new Nykund();
+        
+        
         
 
         public void Menu1()
@@ -30,7 +30,8 @@ namespace Kassasystem
                         case "1":
                         while (true)
                         {
-                        int idInput = ReadInteger("Skriv in ID nummer\n");
+                            Nykund nykund = new Nykund();
+                            int idInput = ReadInteger("Skriv in ID nummer\n");
                         produktregister.SearchByID(idInput);
                         Product? product = produktregister.GetProductByID(idInput);
                         if (product != null)
@@ -61,7 +62,7 @@ namespace Kassasystem
 
                     case "2":
                         Admin.Password();
-                        Admin.AdminMenu();
+                        admin.AdminMenu();
                         return;
 
                     case "0":
