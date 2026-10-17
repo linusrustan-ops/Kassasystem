@@ -7,31 +7,25 @@ namespace Kassasystem
 {
     internal class Product(int id, string name, double price, _Type type)
     {
-        public int ID { get; set; } = id;
-        public string Name { get; set; } = name;
-        public double Price { get; set; } = price;
-        public _Type Type { get; set; } = type;
+        public int ID { get; } = id; //behöver aldrig ändras
+        public string Name { get; private set; } = name;
+        public double Price { get; private set; } = price;
+        public _Type Type { get; private set; } = type;
 
 
-        public string GetProductName()
+        public void GetProductName(string productName)
         {
-            string productName = UI.ReadString("Vad ska produkten heta?");
-            return productName;
+            Name = productName;
+            
         }
 
-        public int GetProductID()
+        public void GetProductPrice(double newPrice)
         {
-            int productID = UI.ReadInteger("Vad är produktens ID?");
-            return productID;
+            Price = newPrice;
+            
         }
 
-        public double GetProductPrice()
-        {
-            double productPrice = UI.ReadDecimal("Vad är produktens pris?");
-            return productPrice;
-        }
-
-        public _Type GetProductType()
+        public static _Type GetProductType()
         {
             while (true)
             {
@@ -56,7 +50,7 @@ namespace Kassasystem
                         break;
                 }
             }
-            return productType;
+            
         }
 
     }

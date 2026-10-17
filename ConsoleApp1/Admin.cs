@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Kassasystem
 {
-    internal class Admin
+    internal class Admin (ProduktRegister produktregister)
     {
         
 
@@ -38,7 +38,7 @@ namespace Kassasystem
            
         }
 
-        public static void AdminMenu()
+        public void AdminMenu()
         {
             while (true)
             {
@@ -66,8 +66,8 @@ namespace Kassasystem
                         break;
 
                     case "4":
-                        string productName = UI.ReadString("Vad ska varan heta?");
-                        
+                        Product newproduct = NewProduct();
+                        produktregister.AddToDictionary(newproduct);
                         break;
 
                     case "0":
@@ -87,8 +87,9 @@ namespace Kassasystem
             int prodID = UI.ReadInteger("Vad ska ID nummret vara?");
             string prodName = UI.ReadString("Vad ska varan heta?");
             double prodPrice = UI.ReadDouble("Vad ska varan kosta?");
-            _Type type = UI.ReadString("Vad är varan av för typ?");
-            Product product = new Product(prodID, prodName, prodPrice, type);
+            _Type prodType = Product.GetProductType();
+            Product product = new Product(prodID, prodName, prodPrice, prodType);
+
             return product;
         }
 
