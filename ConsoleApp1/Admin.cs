@@ -51,7 +51,7 @@ namespace Kassasystem
                     "[1]. Ändra varors egenskaper\n" +
                     "[2]. Skapa kampanj\n" +
                     "[3]. Lägg till vara\n" +
-                    "[0]. Exit");
+                    "[0]. Return to Main menu.");
                 string input = Console.ReadLine();
 
                 switch (input)
@@ -107,8 +107,8 @@ namespace Kassasystem
                                 }
 
                             case "0":
-                                Environment.Exit(2);
-                                break;
+                                return; 
+                                
 
                             default:
                                 Console.WriteLine("Ogiltigt Svar försök igen.");

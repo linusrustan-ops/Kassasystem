@@ -27,11 +27,11 @@ namespace Kassasystem
                     
 
 
-                        case "1":
+                    case "1":
+                        Nykund nykund = new Nykund();
                         while (true)
-                        {
-                            Nykund nykund = new Nykund();
-                            int idInput = ReadInteger("Skriv in ID nummer\n");
+                    {  
+                        int idInput = ReadInteger("Skriv in ID nummer\n");
                         produktregister.SearchByID(idInput);
                         Product? product = produktregister.GetProductByID(idInput);
                         if (product != null)
@@ -57,13 +57,13 @@ namespace Kassasystem
                                 continue;
                             }
                            
-                        }
+                    }
                             break;
 
                     case "2":
                         Admin.Password();
                         admin.AdminMenu();
-                        return;
+                        break;
 
                     case "0":
                         Environment.Exit(0);
