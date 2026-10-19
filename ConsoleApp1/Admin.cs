@@ -18,11 +18,11 @@ namespace Kassasystem
 
 
                 Console.Clear();
-                Console.WriteLine("Vänligen skriv in Lösenordet:\n =============== \n  Eller skriv exit for att asvluta.");
+                Console.WriteLine("Vänligen skriv in Lösenordet:\n =============================== \n  Eller skriv exit for att asvluta.");
 
-                string input = Console.ReadLine();
+                string input = UI.ReadString("Tips: dom som vet dom vet");
 
-                if (input == "admin")
+                if (input == "dsvdv")
                 {
                     Console.WriteLine("Välkommen!");
                     return true;
@@ -52,7 +52,7 @@ namespace Kassasystem
                     "[2]. Skapa kampanj\n" +
                     "[3]. Lägg till vara\n" +
                     "[0]. Return to Main menu.");
-                string input = Console.ReadLine();
+                string input = UI.ReadString("");
 
                 switch (input)
                 {
@@ -129,7 +129,7 @@ namespace Kassasystem
             string prodName = UI.ReadString("Vad ska varan heta?");
             double prodPrice = UI.ReadDouble("Vad ska varan kosta?");
             _Type prodType = Product.GetProductType();
-            Product product = new Product(prodID, prodName, prodPrice, prodType);
+            Product product = new(prodID, prodName, prodPrice, prodType);
 
             return product;
         }
