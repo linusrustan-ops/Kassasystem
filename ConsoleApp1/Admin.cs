@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Net.Http.Headers;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
@@ -7,7 +9,7 @@ using System.Text;
 
 namespace Kassasystem
 {
-    internal class Admin (ProduktRegister produktregister)
+    internal class Admin (ProduktRegister produktregister, KampanjRegister kampanjregister)
     {
         
 
@@ -91,6 +93,7 @@ namespace Kassasystem
                         break;
 
                      case "2":
+                        Kampanj newKampanj = CreateKampanj();
                          break;
 
                             case "3":
@@ -133,16 +136,63 @@ namespace Kassasystem
 
             return product;
         }
+        public Kampanj? CreateKampanj()
+        {
+            
+            Product? product = null;
+            while (product == null)
+            {
+                int userInputID = UI.ReadInteger("Vilken produkt ska kampanjen skapas på?");
+                product = produktregister.GetProductByID(userInputID);
+                
+                if (product == null)
+                {
+                    Console.WriteLine("Produkten hittades tyvärr inte, försök igen.");
+                }
 
-        
-       
-        
+            }
+            double campaignPrice;
+            Console.WriteLine($"Nuvarandet priset på {product.Name} är: {product.Price}kr");
+            while (true)
+            {
+                campaignPrice = UI.ReadDouble("Vad ska Kampanjpriset vara?");
+                if (campaignPrice > 0 && campaignPrice < product.Price)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Priset måste vara högre än 0 och mindre än nuvarande priset.");
+                }
+            }
+            DateTime startDate = DateTime.Now;
 
-        
-        
+            DateTime endDate;
+            while (true)
+            {
+                int inputDays = UI.ReadInteger("Hur många dagar ska kampanjen vara? (1-14 dagar)");
+                
+                if (inputDays > 0 && inputDays <= 14)
+                {
+                    endDate = startDate.AddDays(inputDays);
+                    Console.WriteLine("Kampanjen har skapats!");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Du måste välja mellan 1-14 dagar!");
+                }
+                    
+            }
 
-        
+            Kampanj newCampaign = new(product, campaignPrice, startDate, endDate);
+
+            return newCampaign;
+
+            
 
 
-    }
+
+
+        }
 }

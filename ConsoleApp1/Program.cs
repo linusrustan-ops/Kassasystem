@@ -5,8 +5,10 @@
         static void Main(string[] args)
         {
             ProduktRegister produktregister = new ProduktRegister();
-            Admin admin = new Admin(produktregister);
+            KampanjRegister kampanjregister = new KampanjRegister(produktregister);
+            Admin admin = new Admin(produktregister, kampanjregister);
             UI Ui = new UI(produktregister, admin);
+            //Kampanj kampanj = new Kampanj();
             Ui.Menu1();
             
         }
