@@ -37,6 +37,7 @@ namespace Kassasystem
                         {
                             double quantity = ReadDouble("Hur många/mycket vill du ha?\n");
                             nykund.AddToCustomer(campaign.KProduct, quantity, campaign.KPrice);
+                            Console.WriteLine("Kampanj hittades!");
                             Console.WriteLine("Din varukorg består av:");
                             nykund.PrintList();
                         }
