@@ -94,35 +94,45 @@ namespace Kassasystem
 
                     case "2":
                         Kampanj newKampanj = CreateKampanj();
-                        break;
-
-                    case "3":
-                        Product newproduct = NewProduct();
-                        if (produktregister.AddToDictionary(newproduct) == true)
+                        if (kampanjregister.AddCampaignToList(newKampanj) == true)
                         {
-                            Console.WriteLine("Produkten lades till");
+                            Console.WriteLine("Kampanjen har lagts till!");
                             break;
                         }
                         else
                         {
-                            Console.WriteLine("Produktens ID finns redan i systemet");
+                            Console.WriteLine("En likadan kampanj finns redan på produkten");
                             break;
                         }
 
-                    case "0":
-                        return;
+                    case "3":
+                                Product newproduct = NewProduct();
+                                if (produktregister.AddToDictionary(newproduct) == true)
+                                {
+                                    Console.WriteLine("Produkten lades till");
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Produktens ID finns redan i systemet");
+                                    break;
+                                }
+
+                            case "0":
+                                return;
 
 
-                    default:
-                        Console.WriteLine("Ogiltigt Svar försök igen.");
-                        break;
-                }
+                            default:
+                                Console.WriteLine("Ogiltigt Svar försök igen.");
+                                break;
+                            }
+                        }
             }
 
 
 
 
-        }
+        
 
 
 

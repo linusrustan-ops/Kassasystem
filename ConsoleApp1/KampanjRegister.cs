@@ -68,5 +68,22 @@ namespace Kassasystem
             return campaign;
             
         }
+        public bool AddCampaignToList(Kampanj kampanj)
+        {
+            if (campaignRegister.Any(k => k.KPrice == kampanj.KPrice &&
+            k.KProduct.ID == kampanj.KProduct.ID  
+            && k.EndTime == kampanj.EndTime))
+            {
+                return false;
+            }
+            else
+            {
+                campaignRegister.Add(kampanj);
+                ExportList(campaignRegister);
+                return true;
+            }
+        
+          
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Kassasystem
 {
-    internal class UI(ProduktRegister produktregister, Admin admin, KampanjRegister kampanjregister)
+    internal class UI(ProduktRegister produktregister, Admin admin, KampanjRegister kampanjregister, Kvitto kvitto)
     {
         
         
@@ -61,7 +61,7 @@ namespace Kassasystem
                             if (payOrExit.ToUpper().Trim() == "PAY")
                             {
                                 Console.Clear();
-                                nykund.Receipt();
+                                kvitto.Receipt(nykund);
                                 break;
                             }
                             else if (payOrExit.ToUpper().Trim() == "ENTER")

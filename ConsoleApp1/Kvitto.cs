@@ -4,18 +4,8 @@ using System.Text;
 
 namespace Kassasystem
 {
-    internal class Kvitto
+    internal class Kvitto()
     {
-        public string TodaysDate()
-        {
-            DateTime dateAndTime = DateTime.Now;
-
-
-            string receiptDate = dateAndTime.ToString("yyyy-MM-dd" + " HH:mm | UTC zz");
-
-            return receiptDate;
-        }
-
         public void CreateFile(string name, string text)
         {
             Directory.CreateDirectory("Kvitton");
@@ -24,5 +14,78 @@ namespace Kassasystem
 
             File.AppendAllText(combinedName, text);
         }
+        public string TodaysDate(bool dateOrTime)
+        {
+            DateTime dateAndTime = DateTime.Now;
+
+            if (dateOrTime == true)
+            {
+                string receiptDate = dateAndTime.ToString("yyyy-MM-dd");
+                return receiptDate;
+            }
+            else
+            {
+                string receiptTime = dateAndTime.ToString("HH:mm");
+                return receiptTime;
+            }
+        }
+
+        public void Receipt(Nykund nykund)
+        {
+            string date = TodaysDate(true);
+            string time = TodaysDate(false);
+            int receiptNumber = KvittoNummer.ReceiptIndex();
+            string filename = "Receipt_" + date + ".txt";
+            double totalPrice = 0;
+            string receipt = ($"""
+                ==============================================
+                ============== Linus Hälsobutik ==============
+                ==============================================
+
+                Kvitto.nr:{receiptNumber}
+                Datum:{date}
+                Tid:{time}
+         
+                ----------------------------------------------
+
+                Produkt            Antal     À-Pris     Summa
+                ----------------------------------------------
+                """);
+            foreach (var row in nykund.KundLista)
+            {
+                totalPrice += row.RowPrice;
+                receipt += $"\n" +
+                    $"{row._Product.Name,-16}" +
+                    $"{row.Quantity,7:F2}" +
+                    $"{row.SinglePrice,11:F2}" +
+                    $"{row.RowPrice,12:F2}";
+
+            }
+
+            receipt += $"""
+
+                ----------------------------------------------
+                {"Total:",-34} {totalPrice,8:F2}kr
+
+                ==============================================
+                               VÄLKOMMEN ÅTER!
+
+
+                """;
+
+
+
+            Console.WriteLine(receipt);
+
+            Directory.CreateDirectory("Kvitton");
+
+            string combinedName = Path.Combine("Kvitton", filename);
+
+            File.AppendAllText(combinedName, receipt);
+
+
+        }
+
+
     }
 }
