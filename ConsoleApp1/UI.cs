@@ -2,7 +2,7 @@
 
 namespace Kassasystem
 {
-    internal class UI(ProduktRegister produktregister, Admin admin)
+    internal class UI(ProduktRegister produktregister, Admin admin, KampanjRegister kampanjregister)
     {
         
         
@@ -25,26 +25,38 @@ namespace Kassasystem
                 switch (input)
                 {
                     
-
-
                     case "1":
+
                         Nykund nykund = new Nykund();
-                        while (true)
+                    while (true)
                     {  
                         int idInput = ReadInteger("Skriv in ID nummer\n");
-                        produktregister.SearchByID(idInput);
+                        Kampanj? campaign = kampanjregister.SearchCampaign(idInput);
                         Product? product = produktregister.GetProductByID(idInput);
-                        if (product != null)
+                        if (product != null && campaign != null)
                         {
-
                             double quantity = ReadDouble("Hur många/mycket vill du ha?\n");
-                            nykund.AddToCustomer(product, quantity);
+                            nykund.AddToCustomer(campaign.KProduct, quantity, campaign.KPrice);
                             Console.WriteLine("Din varukorg består av:");
                             nykund.PrintList();
                         }
-                        
-                        
-                            string payOrExit = ReadString("Skriv \"PAY\" för att betala eller skriv \"Enter\" för att handla en ny vara\n");
+                        else if (product != null)
+                        {
+                            double quantity = ReadDouble("Hur många/mycket vill du ha?\n");
+                            nykund.AddToCustomer(product, quantity, product.Price);
+                            Console.WriteLine("Din varukorg består av:");
+                            nykund.PrintList();
+                        }
+
+                        else
+                        {
+                            Console.WriteLine("Varan finns tyvärr inte i vårt system, försök igen!");
+                            continue;
+                        }
+
+
+
+                            string payOrExit = ReadString("Skriv \"PAY\" för att betala eller skriv \"Enter\" för att lägga till en ny vara\n");
                             if (payOrExit.ToUpper().Trim() == "PAY")
                             {
                                 Console.Clear();
@@ -56,8 +68,8 @@ namespace Kassasystem
                                 Console.Clear();
                                 continue;
                             }
-                           
-                    }
+
+                        }
                             break;
 
                     case "2":

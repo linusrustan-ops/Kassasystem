@@ -9,9 +9,9 @@ using System.Text;
 
 namespace Kassasystem
 {
-    internal class Admin (ProduktRegister produktregister, KampanjRegister kampanjregister)
+    internal class Admin(ProduktRegister produktregister, KampanjRegister kampanjregister)
     {
-        
+
 
         public static bool Password()
         {
@@ -29,16 +29,16 @@ namespace Kassasystem
                     Console.WriteLine("Välkommen!");
                     return true;
                 }
-                else if (input.ToLower() == "exit");
+                else if (input.ToLower() == "exit") ;
 
                 else
                 {
                     Console.WriteLine("Fel lösenord, försök igen!");
-                    
+
                 }
             }
 
-           
+
         }
 
         public void AdminMenu()
@@ -92,38 +92,38 @@ namespace Kassasystem
                         }
                         break;
 
-                     case "2":
+                    case "2":
                         Kampanj newKampanj = CreateKampanj();
-                         break;
+                        break;
 
-                            case "3":
-                                Product newproduct = NewProduct();
-                                if (produktregister.AddToDictionary(newproduct) == true)
-                                {
-                                    Console.WriteLine("Produkten lades till");
-                                    break;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Produktens ID finns redan i systemet");
-                                    break;
-                                }
-
-                            case "0":
-                                return; 
-                                
-
-                            default:
-                                Console.WriteLine("Ogiltigt Svar försök igen.");
-                                break;
-                            }
+                    case "3":
+                        Product newproduct = NewProduct();
+                        if (produktregister.AddToDictionary(newproduct) == true)
+                        {
+                            Console.WriteLine("Produkten lades till");
+                            break;
                         }
-                        
-                        
-                        
-                        
+                        else
+                        {
+                            Console.WriteLine("Produktens ID finns redan i systemet");
+                            break;
+                        }
+
+                    case "0":
+                        return;
+
+
+                    default:
+                        Console.WriteLine("Ogiltigt Svar försök igen.");
+                        break;
+                }
             }
-        
+
+
+
+
+        }
+
 
 
         public Product NewProduct()
@@ -138,13 +138,13 @@ namespace Kassasystem
         }
         public Kampanj? CreateKampanj()
         {
-            
+
             Product? product = null;
             while (product == null)
             {
                 int userInputID = UI.ReadInteger("Vilken produkt ska kampanjen skapas på?");
                 product = produktregister.GetProductByID(userInputID);
-                
+
                 if (product == null)
                 {
                     Console.WriteLine("Produkten hittades tyvärr inte, försök igen.");
@@ -171,7 +171,7 @@ namespace Kassasystem
             while (true)
             {
                 int inputDays = UI.ReadInteger("Hur många dagar ska kampanjen vara? (1-14 dagar)");
-                
+
                 if (inputDays > 0 && inputDays <= 14)
                 {
                     endDate = startDate.AddDays(inputDays);
@@ -182,17 +182,18 @@ namespace Kassasystem
                 {
                     Console.WriteLine("Du måste välja mellan 1-14 dagar!");
                 }
-                    
+
             }
 
             Kampanj newCampaign = new(product, campaignPrice, startDate, endDate);
 
             return newCampaign;
 
-            
+
 
 
 
 
         }
+    }
 }

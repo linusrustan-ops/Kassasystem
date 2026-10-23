@@ -7,8 +7,7 @@
             ProduktRegister produktregister = new ProduktRegister();
             KampanjRegister kampanjregister = new KampanjRegister(produktregister);
             Admin admin = new Admin(produktregister, kampanjregister);
-            UI Ui = new UI(produktregister, admin);
-            //Kampanj kampanj = new Kampanj();
+            UI Ui = new UI(produktregister, admin, kampanjregister);
             Ui.Menu1();
             
         }

@@ -30,12 +30,15 @@ namespace Kassasystem
                     {
                         int kampanjID;
                         int.TryParse(parts[0], out kampanjID);
+
                         double campaignPrice;
-                        double.TryParse(parts[3], out campaignPrice);
+                        double.TryParse(parts[1], out campaignPrice);
+
                         DateTime startDate;
-                        DateTime.TryParse(parts[4], out startDate);
+                        DateTime.TryParse(parts[2], out startDate);
+
                         DateTime endDate;
-                        DateTime.TryParse(parts[5], out endDate);
+                        DateTime.TryParse(parts[3], out endDate);
 
                         Product product = produktregister.GetProductByID(kampanjID);
                         Kampanj kampanj = new Kampanj(product, campaignPrice, startDate, endDate);
@@ -53,6 +56,17 @@ namespace Kassasystem
             string[] rows = kampanjRegister.Select(k => $"{k.KProduct.ID}:{k.KPrice}:{k.StartTime}:{k.EndTime}").ToArray();
 
             File.WriteAllLines(searchFile, rows);
+        }
+
+        public Kampanj? SearchCampaign(int searchID)
+        {
+            Kampanj? campaign = campaignRegister.Where(c => c.KProduct.ID == searchID 
+            && c.StartTime <= DateTime.Now 
+            && c.EndTime >= DateTime.Now).
+            OrderBy(c => c.KPrice).FirstOrDefault();
+
+            return campaign;
+            
         }
     }
 }

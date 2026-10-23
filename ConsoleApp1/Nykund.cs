@@ -11,9 +11,9 @@ namespace Kassasystem
         public List<Varukorg> KundLista = new List<Varukorg>();
 
 
-        public Varukorg AddToCustomer(Product product, double quantity)
+        public Varukorg AddToCustomer(Product product, double quantity, double realPrice)
         {
-            Varukorg row = new Varukorg(product, quantity);
+            Varukorg row = new Varukorg(product, quantity, realPrice);
             KundLista.Add(row);
             return row;
         }
