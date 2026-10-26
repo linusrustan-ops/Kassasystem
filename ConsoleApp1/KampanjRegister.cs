@@ -25,7 +25,7 @@ namespace Kassasystem
             if (File.Exists(searchFile))
                 foreach (var row in File.ReadLines(searchFile))
                 {
-                    string[] parts = row.Split(":");
+                    string[] parts = row.Split(";");
                     if (parts.Length >= 4)
                     {
                         int kampanjID;
@@ -53,7 +53,7 @@ namespace Kassasystem
         public void ExportList(List<Kampanj> kampanjRegister)
         {
             string searchFile = "Kampanj.txt";
-            string[] rows = kampanjRegister.Select(k => $"{k.KProduct.ID}:{k.KPrice}:{k.StartTime}:{k.EndTime}").ToArray();
+            string[] rows = kampanjRegister.Select(k => $"{k.KProduct.ID};{k.KPrice};{k.StartTime};{k.EndTime}").ToArray();
 
             File.WriteAllLines(searchFile, rows);
         }

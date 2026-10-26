@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Kassasystem
 {
@@ -25,20 +26,18 @@ namespace Kassasystem
                 foreach (var row in File.ReadLines(searchFile))
                 { 
                     string[] parts = row.Split(":");
-                    if (parts.Length >= 4)
+ 
+                    if (parts.Length != 4 ||
+                        !int.TryParse(parts[0], out int id) ||
+                        !double.TryParse(parts[2], out double price) ||
+                        !Enum.TryParse<_Type>(parts[3], out _Type type))
                     {
-                        int id;
-                        int.TryParse(parts[0], out id);
-                        string name = parts[1];
-                        double price;
-                        double.TryParse(parts[2], out price);
-                        _Type type = (Enum.Parse<_Type>(parts[3]));
-
-
-                        Product vara = new Product(id, name, price, type);
-                        varuRegister[id] = vara;
-
+                        Console.WriteLine("Det finns fel i produktfilen");
+                        continue;
                     }
+                    string name = parts[1];
+                    Product vara = new Product(id, name, price, type);
+                    varuRegister[id] = vara;
                 }
 
             return varuRegister;
@@ -90,7 +89,7 @@ namespace Kassasystem
         {
             int searchID = UI.ReadInteger("Vilken produkt vill du ändra på? (Sök med id)\n");
             SearchByID(searchID);
-            Product product = GetProductByID(searchID);
+            Product? product = GetProductByID(searchID);
             if (product == null)
             {
                 return;
@@ -109,7 +108,7 @@ namespace Kassasystem
         {
             int searchID = UI.ReadInteger("Vilken produkt vill du ändra på? (Sök med id)\n");
             SearchByID(searchID);
-            Product product = GetProductByID(searchID);
+            Product? product = GetProductByID(searchID);
             if (product == null)
             {
                 return;
@@ -119,7 +118,7 @@ namespace Kassasystem
             {
                 double newPrice = UI.ReadDouble("Vad ska produktens nya pris vara? (Max tillåtna pris är 10000.00)\n");
 
-                if (newPrice <= 1 && newPrice >= 10000)
+                if (newPrice >= 1 && newPrice <= 10000)
                 {
                     product.ChangePrice(newPrice);
                     priceIsAccepted = true;

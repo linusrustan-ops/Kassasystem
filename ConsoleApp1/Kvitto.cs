@@ -32,12 +32,14 @@ namespace Kassasystem
 
         public void Receipt(Nykund nykund)
         {
+            
             string date = TodaysDate(true);
             string time = TodaysDate(false);
             int receiptNumber = KvittoNummer.ReceiptIndex();
             string filename = "Receipt_" + date + ".txt";
             double totalPrice = 0;
-            string receipt = ($"""
+            double momsPrice = 0;
+            string receipt = $"""
                 ==============================================
                 ============== Linus Hälsobutik ==============
                 ==============================================
@@ -50,23 +52,25 @@ namespace Kassasystem
 
                 Produkt            Antal     À-Pris     Summa
                 ----------------------------------------------
-                """);
+                """;
             foreach (var row in nykund.KundLista)
             {
+                momsPrice += Prisberäkningar.MomsTotal(row.RowPrice);
                 totalPrice += row.RowPrice;
                 receipt += $"\n" +
                     $"{row._Product.Name,-16}" +
                     $"{row.Quantity,7:F2}" +
                     $"{row.SinglePrice,11:F2}" +
                     $"{row.RowPrice,12:F2}";
+                    
 
             }
 
             receipt += $"""
 
                 ----------------------------------------------
-                {"Total:",-34} {totalPrice,8:F2}kr
-
+                {"Total Netto:",-34} {totalPrice,8:F2}kr
+                {"Total Brutto:",-34} {momsPrice,8:F2}kr
                 ==============================================
                                VÄLKOMMEN ÅTER!
 

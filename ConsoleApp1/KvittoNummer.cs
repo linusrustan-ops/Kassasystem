@@ -20,13 +20,6 @@ namespace Kassasystem
             int nextNumber = File.ReadLines(fileCheck).Max(int.Parse) + 1;
             File.AppendAllText(fileCheck, nextNumber.ToString() + Environment.NewLine);
             return nextNumber;
-
-
-
-
-
-           
-
         }
     }
 }

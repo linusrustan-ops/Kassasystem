@@ -6,27 +6,22 @@ namespace Kassasystem
 {
     internal class Prisberäkningar
     {
-        
-
-        public static double MomsCalc()
+          
+        public static double MomsOnly(double price)
         {
-            double pris = 1; //temporär
-
             double moms = 0.25;
 
-            double momsPris = pris * (moms + 1);
-            return momsPris;
+            double momsOnly = price * moms; 
+            return momsOnly;
         }
 
-        public static double DicountCustomer()
+
+        public static double MomsTotal(double price)
         {
-            double pris = 1; //temporär
+            double moms = 0.25;
 
-            double discount = 0.75; //25% rabatt
-
-            double discountPrice = pris * discount;
-
-            return discountPrice;
+            double momsTotal = price * (moms + 1);
+            return momsTotal;
         }
 
         public double CalculateTotal(double a, double b)
