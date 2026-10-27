@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Kassasystem
 {
-    internal class Product(int id, string name, double price, _Type type)
+    public class Product(int id, string name, double price, Type type)
     {
-        public int ID { get; } = id; //behöver aldrig ändras
+        public int ID { get; } = id; 
         public string Name { get; private set; } = name;
         public double Price { get; private set; } = price;
-        public _Type Type { get; private set; } = type;
+        public Type Type { get; private set; } = type;
 
 
         public void ChangeName(string productName)
@@ -25,7 +25,7 @@ namespace Kassasystem
             
         }
 
-        public static _Type GetProductType()
+        public static Type GetProductType()
         {
             while (true)
             {
@@ -38,11 +38,11 @@ namespace Kassasystem
                 switch (Choice)
                 {
                     case "1":
-                        return _Type.Styck;
+                        return Type.Styck;
                         
 
                     case "2":
-                        return _Type.KG;
+                        return Type.KG;
                         
 
                     default:

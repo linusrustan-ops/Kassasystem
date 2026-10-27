@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace Kassasystem
 {
-    internal class ProduktRegister
+    public class ProduktRegister
     {
         private Dictionary<int, Product> varuRegister;
 
@@ -30,7 +30,7 @@ namespace Kassasystem
                     if (parts.Length != 4 ||
                         !int.TryParse(parts[0], out int id) ||
                         !double.TryParse(parts[2], out double price) ||
-                        !Enum.TryParse<_Type>(parts[3], out _Type type))
+                        !Enum.TryParse<Type>(parts[3], out Type type))
                     {
                         Console.WriteLine("Det finns fel i produktfilen");
                         continue;

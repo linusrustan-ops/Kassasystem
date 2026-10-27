@@ -9,11 +9,11 @@ using System.Text;
 
 namespace Kassasystem
 {
-    internal class Admin(ProduktRegister produktregister, KampanjRegister kampanjregister)
+    public class Admin(ProduktRegister produktregister, KampanjRegister kampanjregister)
     {
 
 
-        public static bool Password()
+        public static void Password()
         {
             while (true)
             {
@@ -27,19 +27,20 @@ namespace Kassasystem
                 if (input == "dsvdv")
                 {
                     Console.WriteLine("Välkommen!");
-                    return true;
+                    continue;
                 }
-                else if (input.ToLower() == "exit") ;
+                else if (input.ToLower() == "exit")
+                {
+                    return;
+                }
 
                 else
                 {
                     Console.WriteLine("Fel lösenord, försök igen!");
 
                 }
+                }
             }
-
-
-        }
 
         public void AdminMenu()
         {
@@ -141,7 +142,7 @@ namespace Kassasystem
             int prodID = produktregister.GenerateID();
             string prodName = UI.ReadString("Vad ska varan heta?");
             double prodPrice = UI.ReadDouble("Vad ska varan kosta?");
-            _Type prodType = Product.GetProductType();
+            Type prodType = Product.GetProductType();
             Product product = new(prodID, prodName, prodPrice, prodType);
 
             return product;
