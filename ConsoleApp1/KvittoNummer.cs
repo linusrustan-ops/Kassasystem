@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Kassasystem
 {
-    internal class KvittoNummer
+    public class KvittoNummer
     {
         public static int ReceiptIndex()
         {

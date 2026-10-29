@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
+
+
 namespace Kassasystem
 {
-    internal class Prisberäkningar
+    public class Prisberäkningar
     {
           
         public static double MomsOnly(double price)

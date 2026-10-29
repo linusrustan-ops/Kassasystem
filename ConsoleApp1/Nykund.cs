@@ -6,7 +6,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Kassasystem
 {
-    internal class Nykund
+    public class Nykund
     {
         public List<Varukorg> KundLista = new List<Varukorg>();
 

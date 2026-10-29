@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="ConsoleApp1/Kassasystem.csproj" />
+  <Project Path="Kassasystemet.Tests/Kassasystemet.Tests..csproj" Id="320cb995-8742-4db3-a8ba-181a38a2d86a" />
 </Solution>

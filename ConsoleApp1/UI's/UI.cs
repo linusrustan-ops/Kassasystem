@@ -2,7 +2,7 @@
 
 namespace Kassasystem
 {
-    internal class UI(ProduktRegister produktregister, Admin admin, KampanjRegister kampanjregister, Kvitto kvitto)
+    public class UI(ProduktRegister produktregister, Admin admin, KampanjRegister kampanjregister, Kvitto kvitto)
     {
         
         
@@ -43,7 +43,7 @@ namespace Kassasystem
                         }
                         else if (product != null)
                         {
-                            double quantity = ReadDouble("Hur många/mycket vill du ha?\n");
+                            double quantity = ReadDouble($"Hur många {product.Type} vill du ha?\n");
                             nykund.AddToCustomer(product, quantity, product.Price);
                             Console.WriteLine("Din varukorg består av:");
                             nykund.PrintList();
@@ -120,12 +120,17 @@ namespace Kassasystem
                 {
                     Console.WriteLine("Ogiltigt värde. Försök igen");
                 }
+                else if (value < 0)
+                {
+                    Console.WriteLine("Ett tal får inte vara negativt.");
+                }
                 else
                 {
                     return value;
                 }
             }
         }
+        
 
         public static double ReadDouble(string message)
         {
@@ -138,6 +143,10 @@ namespace Kassasystem
                 if (!double.TryParse(input, out value))
                 {
                     Console.WriteLine("Ogiltigt värde. Försök igen");
+                }
+                else if (!double.IsFinite(value) || value < 0)
+                {
+                    Console.WriteLine("Ett tal får inte vara negativt.");
                 }
                 else
                 {

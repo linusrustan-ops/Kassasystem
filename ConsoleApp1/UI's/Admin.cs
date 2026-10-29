@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Kassasystem
 {
-    public class Admin(ProduktRegister produktregister, KampanjRegister kampanjregister)
+    public class Admin(ProduktRegister produktregister, KampanjRegister kampanjregister, ProductService productservice)
     {
 
 
@@ -22,12 +22,12 @@ namespace Kassasystem
                 Console.Clear();
                 Console.WriteLine("Vänligen skriv in Lösenordet:\n =============================== \n  Eller skriv exit for att asvluta.");
 
-                string input = UI.ReadString("Tips: dom som vet dom vet");
+                string input = UI.ReadString("Tips: admin");
 
-                if (input == "dsvdv")
+                if (input == "admin")
                 {
                     Console.WriteLine("Välkommen!");
-                    continue;
+                    return;
                 }
                 else if (input.ToLower() == "exit")
                 {
@@ -67,18 +67,18 @@ namespace Kassasystem
                             "[0]. Avsluta.");
                         if (userChoice == 1)
                         {
-                            produktregister.ChangeExProductName();
+                            productservice.ChangeExProductName();
                             break;
                         }
                         else if (userChoice == 2)
                         {
-                            produktregister.ChangeExProductPrice();
+                            productservice.ChangeExProductPrice();
                             break;
                         }
                         else if (userChoice == 3)
                         {
-                            produktregister.ChangeExProductName();
-                            produktregister.ChangeExProductPrice();
+                            productservice.ChangeExProductName();
+                            productservice.ChangeExProductPrice();
                             break;
                         }
                         else if (userChoice == 0)
@@ -94,7 +94,7 @@ namespace Kassasystem
                         break;
 
                     case "2":
-                        Kampanj newKampanj = CreateKampanj();
+                        Kampanj? newKampanj = CreateKampanj();
                         if (kampanjregister.AddCampaignToList(newKampanj) == true)
                         {
                             Console.WriteLine("Kampanjen har lagts till!");

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Kassasystem
 {
-    internal class Kampanj(Product kProduct, double kPrice, DateTime startTime, DateTime endTime)
+    public class Kampanj(Product kProduct, double kPrice, DateTime startTime, DateTime endTime)
     {
         public Product KProduct { get; } = kProduct;
         public double KPrice { get; } = kPrice;

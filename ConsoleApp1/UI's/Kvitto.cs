@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Kassasystem
 {
-    internal class Kvitto()
+    public class Kvitto()
     {
         public void CreateFile(string name, string text)
         {
@@ -71,6 +71,7 @@ namespace Kassasystem
                 ----------------------------------------------
                 {"Total Netto:",-34} {totalPrice,8:F2}kr
                 {"Total Brutto:",-34} {momsPrice,8:F2}kr
+                {"Varav Moms:", -34}  {Prisberäkningar.MomsOnly(totalPrice)}
                 ==============================================
                                VÄLKOMMEN ÅTER!
 

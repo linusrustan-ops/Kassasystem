@@ -5,25 +5,13 @@ using System.Threading.Channels;
 
 namespace Kassasystem
 {
-    internal class Varukorg(Product product, double quantity, double realPrice)
+    public class Varukorg(Product product, double quantity, double realPrice)
     {
         public Product _Product { get; private set; } = product;
-        public double Quantity { get; private set; } = quantity;
+        public double Quantity { get; } = quantity;
         public double SinglePrice => realPrice;
         public double RowPrice => Quantity * SinglePrice;
 
-        
-    
-
-    public double HowMany()
-        {
-           quantity = UI.ReadDouble("Hur Mycket/Många vill du ha?");
-
-            return quantity;
-        }
-
     }
-
-
 }
        
