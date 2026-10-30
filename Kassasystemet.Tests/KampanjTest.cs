@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Kassasystem;
+using Kassasystem.Models;
+using Kassasystem.Repos;
 
 namespace Kassasystemet.Tests_
 {

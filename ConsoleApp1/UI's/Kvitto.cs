@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Kassasystem.Repos;
+using Kassasystem.Services;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -36,7 +38,7 @@ namespace Kassasystem
             string date = TodaysDate(true);
             string time = TodaysDate(false);
             int receiptNumber = KvittoNummer.ReceiptIndex();
-            string filename = "Receipt_" + date + ".txt";
+            string filename = "RECEIPT_" + date + ".txt";
             double totalPrice = 0;
             double momsPrice = 0;
             string receipt = $"""

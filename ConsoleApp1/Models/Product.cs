@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
-namespace Kassasystem
+namespace Kassasystem.Models
 {
     public class Product(int id, string name, double price, Type type)
     {

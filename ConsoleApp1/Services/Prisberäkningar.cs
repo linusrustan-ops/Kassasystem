@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 
 
-namespace Kassasystem
+namespace Kassasystem.Services
 {
     public class Prisberäkningar
     {
-          
         public static double MomsOnly(double price)
         {
             double moms = 0.25;
@@ -24,12 +25,6 @@ namespace Kassasystem
 
             double momsTotal = price * (moms + 1);
             return momsTotal;
-        }
-
-        public double CalculateTotal(double a, double b)
-        {
-            double total = a * b;
-            return total;
         }
     }
 }

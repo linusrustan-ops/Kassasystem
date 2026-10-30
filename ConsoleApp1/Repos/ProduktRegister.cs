@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Kassasystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Kassasystem
+namespace Kassasystem.Repos
 {
-    public class ProduktRegister
+    public class ProduktRegister : IProductRepo
     {
         private Dictionary<int, Product> varuRegister;
 
@@ -91,6 +92,10 @@ namespace Kassasystem
             int highestID = varuRegister.Keys.Max();
             int generatedID = (highestID + 1);
             return generatedID;
+        }
+        public bool CheckIfNameExists(string name)
+        {
+            return (varuRegister.Values.Any(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)));
         }
 
 

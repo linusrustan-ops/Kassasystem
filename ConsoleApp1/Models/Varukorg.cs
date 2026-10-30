@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Channels;
 
-namespace Kassasystem
+namespace Kassasystem.Models
 {
     public class Varukorg(Product product, double quantity, double realPrice)
     {

@@ -1,13 +1,11 @@
-﻿using System.ComponentModel;
+﻿using Kassasystem.Models;
+using Kassasystem.Repos;
+using System.ComponentModel;
 
 namespace Kassasystem
 {
     public class UI(ProduktRegister produktregister, Admin admin, KampanjRegister kampanjregister, Kvitto kvitto)
     {
-        
-        
-        
-
         public void Menu1()
         {
             while (true)

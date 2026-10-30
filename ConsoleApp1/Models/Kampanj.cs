@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Kassasystem
+namespace Kassasystem.Models
 {
     public class Kampanj(Product kProduct, double kPrice, DateTime startTime, DateTime endTime)
     {

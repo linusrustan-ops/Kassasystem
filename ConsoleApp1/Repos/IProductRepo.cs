@@ -1,19 +1,16 @@
-﻿using System;
+﻿using Kassasystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Kassasystem
+namespace Kassasystem.Repos
 {
-    public interface IRegister
+    public interface IProductRepo
     {
-        public void ImportFile()
-        {
-
-        }
-        public void ExportFile()
-        {
-
-        }
-
+        Product? GetProductByID(int id);
+        bool CheckIfNameExists(string name);
+        int GenerateID();
+        bool AddToDictionary(Product product);
+        void ExportDictionary();
     }
 }

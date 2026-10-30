@@ -1,21 +1,24 @@
-﻿using System;
+﻿using Kassasystem.Models;
+using Kassasystem.Repos;
+using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace Kassasystem
+namespace Kassasystem.Services
 {
     public class ProductService
     {
-        private readonly ProduktRegister _produktRegister;
+        private readonly IProductRepo _produktRegister;
 
-        public ProductService(ProduktRegister produktregister)
+        public ProductService (IProductRepo produktregister)
         {
+
             _produktRegister = produktregister;
         }
         public void ChangeExProductPrice()
         {
             int searchID = UI.ReadInteger("Vilken produkt vill du ändra på? (Sök med id)\n");
-            //_produktRegister.SearchByID(searchID);
             Product? product = _produktRegister.GetProductByID(searchID);
             if (product == null)
             {
@@ -43,7 +46,6 @@ namespace Kassasystem
         public void ChangeExProductName()
         {
             int searchID = UI.ReadInteger("Vilken produkt vill du ändra på? (Sök med id)\n");
-            //_produktRegister.SearchByID(searchID);
             Product? product = _produktRegister.GetProductByID(searchID);
             if (product == null)
             {
@@ -58,6 +60,28 @@ namespace Kassasystem
 
             _produktRegister.ExportDictionary();
         }
-        
+        public Product? NewProduct()
+        {
+            string prodName = UI.ReadString("Vad ska varan heta?");
+            if (_produktRegister.CheckIfNameExists(prodName))
+            {
+                Console.WriteLine("En vara finns redan med det namnet.");
+                return null;
+            }
+            else
+            {
+                int prodID = _produktRegister.GenerateID();
+                double prodPrice = UI.ReadDouble("Vad ska varan kosta?");
+                Type prodType = Product.GetProductType();
+                Product product = new(prodID, prodName, prodPrice, prodType);
+
+                return product;
+            } 
+        }
+        public bool ProductIsAdded(Product product)
+        {
+            return (_produktRegister.AddToDictionary(product));
+        }
+
     }
 }

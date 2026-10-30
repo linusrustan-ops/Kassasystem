@@ -1,4 +1,7 @@
-﻿namespace Kassasystem
+﻿using Kassasystem.Repos;
+using Kassasystem.Services;
+
+namespace Kassasystem
 {
     public class Program
     {
@@ -8,7 +11,8 @@
             ProduktRegister produktregister = new ProduktRegister();
             KampanjRegister kampanjregister = new KampanjRegister(produktregister);
             ProductService productservice = new ProductService(produktregister);
-            Admin admin = new Admin(produktregister, kampanjregister, productservice);
+            KampanjService kampanjservice = new KampanjService(kampanjregister, produktregister);
+            Admin admin = new Admin(productservice, kampanjservice);
             UI Ui = new UI(produktregister, admin, kampanjregister, kvitto);
             Ui.Menu1();
             

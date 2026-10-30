@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Kassasystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Kassasystem
+namespace Kassasystem.Repos
 {
     public class Nykund
     {

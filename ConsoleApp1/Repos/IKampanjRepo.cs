@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Kassasystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Kassasystem
+namespace Kassasystem.Repos
 {
-    internal class IKampanjRepo
+    public interface IKampanjRepo
     {
+        IReadOnlyList<Kampanj> ShowCampaigns();
+        public void AddCampaignToList(Kampanj kampanj);
+        public bool CampaignExists(Kampanj kampanj);
+        public void RemoveCampaign(Kampanj kampanj);
+
     }
 }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Kassasystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Kassasystem
+namespace Kassasystem.Repos
 {
     public class KampanjRegister : IKampanjRepo
     {
@@ -27,10 +28,10 @@ namespace Kassasystem
                 {
                     string[] parts = row.Split(";");
                     if (parts.Length != 4 || 
-                        int.TryParse(parts[0], out int kampanjID) ||
-                        double.TryParse(parts[1], out double campaignPrice) ||
-                        DateTime.TryParse(parts[2], out DateTime startDate) ||
-                        DateTime.TryParse(parts[3], out DateTime endDate))
+                        !int.TryParse(parts[0], out int kampanjID) ||
+                        !double.TryParse(parts[1], out double campaignPrice) ||
+                        !DateTime.TryParse(parts[2], out DateTime startDate) ||
+                        !DateTime.TryParse(parts[3], out DateTime endDate))
                     {
                         Console.WriteLine("Radfel Finns på kampanjen");
                         continue;

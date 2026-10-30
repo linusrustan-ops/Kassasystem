@@ -1,7 +1,8 @@
 ﻿namespace Kassasystemet.Tests_;
-    using Kassasystem;
 
-    public class PrisberäkningarTest
+using Kassasystem.Services;
+
+public class PrisberäkningarTest
     {
         [Fact]
         public void MomsOnlyTest1()
