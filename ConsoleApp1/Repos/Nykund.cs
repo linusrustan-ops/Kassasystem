@@ -28,5 +28,37 @@ namespace Kassasystem.Repos
             }
 
         }
+        public (int, double) GetIDAndQuantity()
+        {
+            double quantity;
+            int id;
+
+            while (true)
+            {
+
+                string both = UI.ReadString("Vilket id och hur många? skriv \"ID (mellanrum) mängd\" ");
+                string[] array = both.Split(" ");
+
+                if (array.Length != 2 || !int.TryParse(array[0], out id) || !double.TryParse(array[1], out quantity))
+                {
+                    Console.WriteLine("Ogiltigt skrivet, det ska vara: \"ID (mellanrum) mängd\"");
+                    continue;
+                }
+                else if (id <= 0 || quantity <= 0)
+                {
+                    Console.WriteLine("ID och mängd måste vara positiva tal.");
+                    continue; 
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return (id, quantity);
+
+
+
+        }
     }
 }
+

@@ -23,11 +23,14 @@ namespace Kassasystem.Repos
             string searchFile = "Varor.txt";
             Dictionary<int, Product> register = new Dictionary<int, Product>();
 
-            if (File.Exists(searchFile))
+            if (!File.Exists(searchFile))
+            {
+                CreateFileIfNoExists(searchFile);   
+            } 
                 foreach (var row in File.ReadLines(searchFile))
-                { 
+                {
                     string[] parts = row.Split(":");
- 
+
                     if (parts.Length != 4 ||
                         !int.TryParse(parts[0], out int id) ||
                         !double.TryParse(parts[2], out double price) ||
@@ -40,9 +43,10 @@ namespace Kassasystem.Repos
                     Product vara = new Product(id, name, price, type);
                     register[id] = vara;
                 }
-
+            
+            
             return register;
-        }
+    }
         public void SearchByID(int input)
         {
             
@@ -96,6 +100,14 @@ namespace Kassasystem.Repos
         public bool CheckIfNameExists(string name)
         {
             return (varuRegister.Values.Any(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        private void CreateFileIfNoExists(string filepath)
+        {
+            string[] baseProducts = {"300:Monster:14.99:Styck"
+                    ,"301:Redbull:13.99:Styck"
+                    ,"302:Lösviktsgodis:99.99:KG"};
+            File.WriteAllLines(filepath, baseProducts);
         }
 
 

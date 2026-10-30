@@ -1,21 +1,12 @@
 ﻿using Kassasystem.Repos;
-using Kassasystem.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Kassasystem
+namespace Kassasystem.Services
 {
-    public class Kvitto()
+    public class KvittoService(KvittoRegister kvittoregister)
     {
-        public void CreateFile(string name, string text)
-        {
-            Directory.CreateDirectory("Kvitton");
-
-            string combinedName = Path.Combine("Kvitton", name);
-
-            File.AppendAllText(combinedName, text);
-        }
         public string TodaysDate(bool dateOrTime)
         {
             DateTime dateAndTime = DateTime.Now;
@@ -32,13 +23,12 @@ namespace Kassasystem
             }
         }
 
-        public void Receipt(Nykund nykund)
+        public string Receipt(Nykund nykund)
         {
             
             string date = TodaysDate(true);
             string time = TodaysDate(false);
             int receiptNumber = KvittoNummer.ReceiptIndex();
-            string filename = "RECEIPT_" + date + ".txt";
             double totalPrice = 0;
             double momsPrice = 0;
             string receipt = $"""
@@ -55,10 +45,10 @@ namespace Kassasystem
                 Produkt            Antal     À-Pris     Summa
                 ----------------------------------------------
                 """;
+            totalPrice += Prisberäkningar.CalculateTotal(nykund.KundLista);
             foreach (var row in nykund.KundLista)
             {
                 momsPrice += Prisberäkningar.MomsTotal(row.RowPrice);
-                totalPrice += row.RowPrice;
                 receipt += $"\n" +
                     $"{row._Product.Name,-16}" +
                     $"{row.Quantity,7:F2}" +
@@ -80,17 +70,22 @@ namespace Kassasystem
 
                 """;
 
+            return receipt;
 
+        }
 
-            Console.WriteLine(receipt);
-
-            Directory.CreateDirectory("Kvitton");
-
-            string combinedName = Path.Combine("Kvitton", filename);
-
-            File.AppendAllText(combinedName, receipt);
-
-
+        public void CheckReceipt(string receipt)
+        {
+            string date = TodaysDate(true);
+            if (!string.IsNullOrWhiteSpace(receipt))
+            {
+                kvittoregister.ExportReceipt(receipt, date);
+            }
+            else
+            {
+                Console.WriteLine("Kvittot lyckades tyvär inte skapas, kontakta Linus.");
+            }
+            
         }
 
 
