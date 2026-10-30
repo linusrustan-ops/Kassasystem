@@ -118,5 +118,9 @@ namespace Kassasystem.Services
 
             
         }
+        public Kampanj? GetActiveCampaign(int id)
+        {
+            return _kampanjRegister.SearchCampaign(id);
+        }
     }
 }

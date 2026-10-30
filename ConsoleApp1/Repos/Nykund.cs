@@ -24,7 +24,7 @@ namespace Kassasystem.Repos
             foreach (var row in KundLista)
             {
 
-                Console.WriteLine($"\n{row._Product.Name} |{row.Quantity} * {row.SinglePrice}kr/{row._Product.Type}|\n");
+                Console.WriteLine($"\n{row._Product.Name} | {row.Quantity} * {row.SinglePrice}kr/{row._Product.Type}|\n");
             }
 
         }

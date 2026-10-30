@@ -7,11 +7,13 @@ namespace Kassasystem.Repos
 {
     public class KampanjRegister : IKampanjRepo
     {
-        private readonly ProduktRegister produktregister;
+        private readonly IProductRepo produktregister;
+        private readonly string _filePath;
         private List<Kampanj> campaignRegister;
         
-        public KampanjRegister(ProduktRegister produktregister)
+        public KampanjRegister(IProductRepo produktregister, string filepath = "Kampanj.txt")
         {
+            _filePath = filepath;
             this.produktregister = produktregister;
             this.campaignRegister = FillCampaignList();
         }
@@ -20,7 +22,7 @@ namespace Kassasystem.Repos
 
         public List<Kampanj> FillCampaignList()
         {
-            string searchFile = "Kampanj.txt";
+            string searchFile = _filePath;
             List<Kampanj> kampanjRegister = new List<Kampanj>();
 
             if (File.Exists(searchFile))
@@ -40,7 +42,7 @@ namespace Kassasystem.Repos
                     if (product == null)
                     {
                         Console.WriteLine("Produkten hittades inte, kontakta support!");
-                        Environment.Exit(2);
+                        continue;
                     }
                     Kampanj kampanj = new Kampanj(product, campaignPrice, startDate, endDate);
                     kampanjRegister.Add(kampanj);
@@ -50,7 +52,7 @@ namespace Kassasystem.Repos
         }
         public void ExportList(List<Kampanj> kampanjRegister)
         {
-            string searchFile = "Kampanj.txt";
+            string searchFile = _filePath;
             string[] rows = kampanjRegister.Select(k => $"{k.KProduct.ID};{k.KPrice};{k.StartTime};{k.EndTime}").ToArray();
 
             File.WriteAllLines(searchFile, rows);

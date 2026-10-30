@@ -7,13 +7,14 @@ namespace Kassasystem
     {
         static void Main(string[] args)
         {
-            Kvitto kvitto = new Kvitto();
-            ProduktRegister produktregister = new ProduktRegister();
-            KampanjRegister kampanjregister = new KampanjRegister(produktregister);
-            ProductService productservice = new ProductService(produktregister);
-            KampanjService kampanjservice = new KampanjService(kampanjregister, produktregister);
-            Admin admin = new Admin(productservice, kampanjservice);
-            UI Ui = new UI(produktregister, admin, kampanjregister, kvitto);
+            KvittoRegister kvittoregister = new();
+            KvittoService kvitto = new(kvittoregister);
+            ProduktRegister produktregister = new();
+            KampanjRegister kampanjregister = new(produktregister);
+            ProductService productservice = new(produktregister);
+            KampanjService kampanjservice = new(kampanjregister, produktregister);
+            Admin admin = new(productservice, kampanjservice);
+            UI Ui = new(productservice, admin, kvitto, kampanjservice);
             Ui.Menu1();
             
         }

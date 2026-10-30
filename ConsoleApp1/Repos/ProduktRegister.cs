@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Linq;
 
@@ -10,9 +11,11 @@ namespace Kassasystem.Repos
     public class ProduktRegister : IProductRepo
     {
         private Dictionary<int, Product> varuRegister;
+        private readonly string _filePath;
 
-        public ProduktRegister()
+        public ProduktRegister(string filepath = "Varor.txt")
         {
+            _filePath = filepath;
             varuRegister = FillDictionary();
         }
         
@@ -20,7 +23,7 @@ namespace Kassasystem.Repos
 
         public Dictionary<int, Product> FillDictionary()
         {
-            string searchFile = "Varor.txt";
+            string searchFile = _filePath;
             Dictionary<int, Product> register = new Dictionary<int, Product>();
 
             if (!File.Exists(searchFile))
@@ -70,7 +73,7 @@ namespace Kassasystem.Repos
 
         public void ExportDictionary()
         {
-            string searchFile = "Varor.txt";
+            string searchFile = _filePath;
             string[] rows = varuRegister.Values.Select(p => $"{p.ID}:{p.Name}:{p.Price}:{p.Type}").ToArray();
 
             File.WriteAllLines(searchFile, rows);

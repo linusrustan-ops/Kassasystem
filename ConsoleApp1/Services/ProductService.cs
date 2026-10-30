@@ -82,6 +82,10 @@ namespace Kassasystem.Services
         {
             return (_produktRegister.AddToDictionary(product));
         }
-
+        public Product? GetProductBySearch(int id)
+        {
+            return _produktRegister.GetProductByID(id);
+        }
     }
 }
+

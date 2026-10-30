@@ -1,10 +1,11 @@
 ﻿using Kassasystem.Models;
 using Kassasystem.Repos;
+using Kassasystem.Services;
 using System.ComponentModel;
 
 namespace Kassasystem
 {
-    public class UI(ProduktRegister produktregister, Admin admin, KampanjRegister kampanjregister, Kvitto kvitto)
+    public class UI(ProductService productservice, Admin admin, KvittoService kvitto, KampanjService kampanjservice)
     {
         public void Menu1()
         {
@@ -27,13 +28,12 @@ namespace Kassasystem
 
                         Nykund nykund = new Nykund();
                     while (true)
-                    {  
-                        int idInput = ReadInteger("Skriv in ID nummer\n");
-                        Kampanj? campaign = kampanjregister.SearchCampaign(idInput);
-                        Product? product = produktregister.GetProductByID(idInput);
+                    {
+                        (int idInput, double quantity) = nykund.GetIDAndQuantity();
+                        Kampanj? campaign = kampanjservice.GetActiveCampaign(idInput);
+                        Product? product = productservice.GetProductBySearch(idInput);
                         if (product != null && campaign != null)
                         {
-                            double quantity = ReadDouble("Hur många/mycket vill du ha?\n");
                             nykund.AddToCustomer(campaign.KProduct, quantity, campaign.KPrice);
                             Console.WriteLine("Kampanj hittades!");
                             Console.WriteLine("Din varukorg består av:");
@@ -41,7 +41,6 @@ namespace Kassasystem
                         }
                         else if (product != null)
                         {
-                            double quantity = ReadDouble($"Hur många {product.Type} vill du ha?\n");
                             nykund.AddToCustomer(product, quantity, product.Price);
                             Console.WriteLine("Din varukorg består av:");
                             nykund.PrintList();
@@ -59,7 +58,7 @@ namespace Kassasystem
                             if (payOrExit.ToUpper().Trim() == "PAY")
                             {
                                 Console.Clear();
-                                kvitto.Receipt(nykund);
+                                kvitto.CheckReceipt(kvitto.Receipt(nykund));
                                 break;
                             }
                             else if (payOrExit.ToUpper().Trim() == "ENTER")
@@ -118,7 +117,7 @@ namespace Kassasystem
                 {
                     Console.WriteLine("Ogiltigt värde. Försök igen");
                 }
-                else if (value < 0)
+                else if (value <= 0)
                 {
                     Console.WriteLine("Ett tal får inte vara negativt.");
                 }
@@ -142,7 +141,7 @@ namespace Kassasystem
                 {
                     Console.WriteLine("Ogiltigt värde. Försök igen");
                 }
-                else if (!double.IsFinite(value) || value < 0)
+                else if (!double.IsFinite(value) || value <= 0)
                 {
                     Console.WriteLine("Ett tal får inte vara negativt.");
                 }

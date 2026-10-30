@@ -11,6 +11,7 @@ namespace Kassasystem.Repos
         public void AddCampaignToList(Kampanj kampanj);
         public bool CampaignExists(Kampanj kampanj);
         public void RemoveCampaign(Kampanj kampanj);
+        public Kampanj? SearchCampaign(int id);
 
     }
 }
